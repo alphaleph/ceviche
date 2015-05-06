@@ -16,6 +16,7 @@ public class MainActivity extends ActionBarActivity {
         
         Log.d("DEBUG", "Fuckyou...");
         Log.d("lslala", "testestes");
+        // stashing
     }
 
     @Override
