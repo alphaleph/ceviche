@@ -15,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         Log.d("DEBUG", "Testing...");
+        Log.d("DEBUG", "Testing again...");
     }
 
     @Override
