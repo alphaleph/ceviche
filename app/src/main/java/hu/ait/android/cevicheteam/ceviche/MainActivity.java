@@ -14,7 +14,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("DEBUG", "FUCK YOU...");
+        Log.d("DEBUG", "Testing...");
     }
 
     @Override
