@@ -2,20 +2,28 @@ package hu.ait.android.cevicheteam.ceviche;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        showFragment(MainFragment.TAG);
+    }
 
-        Log.d("DEBUG", "Frogs rogs blogs...");
-        Log.d("Recheck", "LOL");
+    private void showFragment(String fragmentTag) {
+        if (MainFragment.TAG.equals(fragmentTag)) {
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            MainFragment mainFragment = new MainFragment();
+            fragmentTransaction.replace(R.id.layoutContainer, mainFragment, MainFragment.TAG);
+            fragmentTransaction.commit();
+        }
     }
 
     @Override
