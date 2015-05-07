@@ -8,6 +8,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
@@ -18,7 +20,7 @@ import java.util.List;
 import hu.ait.android.cevicheteam.ceviche.Adapters.CircularAdapter;
 
 
-public class MainFragment extends android.support.v4.app.Fragment {
+public class MainFragment extends android.support.v4.app.Fragment implements ListBuddiesLayout.OnBuddyItemClickListener {
 
     public static final String TAG = "Home_Fragment";
 
@@ -59,11 +61,17 @@ public class MainFragment extends android.support.v4.app.Fragment {
         CircularAdapter adapter2 = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_tall), mImagesRight);
 
         listBuddies.setAdapters(adapter, adapter2);
+        listBuddies.setOnItemClickListener(this);
         return rootView;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBuddyItemClicked(AdapterView<?> adapterView, View view, int buddy, int position, long id) {
+        Toast.makeText(getActivity(), Integer.toString(buddy) + " " + Integer.toString(position), Toast.LENGTH_LONG).show();
     }
 }
