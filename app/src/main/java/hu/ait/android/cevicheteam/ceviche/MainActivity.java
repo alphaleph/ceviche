@@ -31,15 +31,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         fragmentManager = getSupportFragmentManager();
         showFragment(MainFragment.TAG);
 
-
-        MenuParams menuParams = new MenuParams();
-        menuParams.setActionBarSize((int) getResources().getDimension(R.dimen.tool_bar_height));
-        menuParams.setMenuObjects(getMenuObjects());
-        menuParams.setClosableOutside(true);
-        menuParams.setAnimationDelay(100);
-        // set other settings to meet your needs
-        mMenuDialogFragment = ContextMenuDialogFragment.newInstance(menuParams);
-
+        initMenu();
     }
 
     private void showFragment(String fragmentTag) {
@@ -72,6 +64,16 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initMenu() {
+        MenuParams menuParams = new MenuParams();
+        menuParams.setActionBarSize((int) getResources().getDimension(R.dimen.tool_bar_height));
+        menuParams.setMenuObjects(getMenuObjects());
+        menuParams.setClosableOutside(true);
+        menuParams.setAnimationDelay(100);
+        // set other settings to meet your needs
+        mMenuDialogFragment = ContextMenuDialogFragment.newInstance(menuParams);
     }
 
     private List<MenuObject> getMenuObjects() {
