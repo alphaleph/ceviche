@@ -1,10 +1,6 @@
 package hu.ait.android.cevicheteam.ceviche.Utils;
 
-/**
- * Created by urielmandujano on 5/7/15.
- */
 import android.graphics.Bitmap;
-
 import com.squareup.picasso.Transformation;
 
 public class ScaleToFitWidthHeightTransform implements Transformation {

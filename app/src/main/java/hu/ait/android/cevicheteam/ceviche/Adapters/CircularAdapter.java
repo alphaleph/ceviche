@@ -15,9 +15,6 @@ import java.util.List;
 import hu.ait.android.cevicheteam.ceviche.R;
 import hu.ait.android.cevicheteam.ceviche.Utils.ScaleToFitWidthHeightTransform;
 
-/**
- * Created by urielmandujano on 5/7/15.
- */
 public class CircularAdapter extends CircularLoopAdapter {
 
     private static final String TAG = CircularAdapter.class.getSimpleName();
