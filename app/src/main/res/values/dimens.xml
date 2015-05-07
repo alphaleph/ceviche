@@ -6,4 +6,6 @@
     <dimen name="item_height_tall">220dp</dimen>
     <dimen name="gap">5dp</dimen>
     <dimen name="divider_height">@dimen/gap</dimen>
+    <dimen name="tool_bar_height">56dp</dimen>
+
 </resources>

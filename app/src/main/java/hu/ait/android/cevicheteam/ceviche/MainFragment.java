@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,6 @@ public class MainFragment extends android.support.v4.app.Fragment implements Lis
             "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSLQ0O_VUN_XcJItRcnzw4uznDFI6QHeXTWfNgICsK2y-9tEv-I",
             "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQLhaxZOImFClMw-o3IJTciOJ14W_xl5GV0JK5ZcsZ6Gt1009iRJQ",
             "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSDcGiolZ6G2Wt_rLmks-35vpiNiZ2TwwuABDSR5oO1Nxao_GBbrA",
-
-
     };
 
     public final static String[] imageUrls_right = new String[]{

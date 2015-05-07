@@ -28,4 +28,7 @@ dependencies {
 
     // Picasso image viewer
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    // Menu
+    compile 'com.yalantis:contextmenu:1.0.4'
 }

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple">#8c637b</color>
-    <color name="tan">#cec594E5</color>
+    <color name="tan">#40cec594</color>
     <color name="blue">#7733B5E5</color>
-
-
 
 </resources>
