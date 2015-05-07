@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         menuParams.setActionBarSize((int) getResources().getDimension(R.dimen.tool_bar_height));
         menuParams.setMenuObjects(getMenuObjects());
         menuParams.setClosableOutside(true);
+        menuParams.setAnimationDelay(100);
         // set other settings to meet your needs
         mMenuDialogFragment = ContextMenuDialogFragment.newInstance(menuParams);
 
