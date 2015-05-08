@@ -9,16 +9,21 @@ import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ActionMenuView;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
+import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+public class MainActivity extends AppCompatActivity implements OnMenuItemClickListener {
 
     private android.support.v4.app.FragmentManager fragmentManager;
     private DialogFragment mMenuDialogFragment;
@@ -106,8 +111,20 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        return false;
+    public void onMenuItemClick(View clickedView, int position) {
+        // Todo
+        if (position == 1) {
+            // Edit Profile Activity
+        }
+        if (position == 2) {
+            // Take Picture Activity
+        }
+        if (position == 3) {
+            // Switch Settings Activity
+        }
+        if (position == 4) {
+            // Favorites Activity
+        }
     }
 
     @Override

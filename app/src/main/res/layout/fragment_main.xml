@@ -12,7 +12,7 @@
 
         listbuddies:speed="2"
         listbuddies:gap="@dimen/gap"
-        listbuddies:gapColor="@color/purple"
+        listbuddies:gapColor="@color/black"
         listbuddies:listsDivider="@drawable/divider"
         listbuddies:listsDividerHeight="@dimen/divider_height"
         listbuddies:autoScrollFaster="right"

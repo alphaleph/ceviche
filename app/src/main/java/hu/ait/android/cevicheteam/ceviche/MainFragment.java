@@ -1,11 +1,7 @@
 package hu.ait.android.cevicheteam.ceviche;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +67,14 @@ public class MainFragment extends android.support.v4.app.Fragment implements Lis
 
     @Override
     public void onBuddyItemClicked(AdapterView<?> adapterView, View view, int buddy, int position, long id) {
-        Toast.makeText(getActivity(), Integer.toString(buddy) + " " + Integer.toString(position), Toast.LENGTH_LONG).show();
+        // Todo -> go to a ViewPager with current item
+        // buddy == 0 -> Item in left column
+        String Url;
+        if (buddy == 0) {
+            Url = imageUrls_left[position];
+        } else {
+            Url = imageUrls_right[position];
+        }
+        Toast.makeText(getActivity(), Url , Toast.LENGTH_LONG).show();
     }
 }
