@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         showFragment(MainFragment.TAG);
+        
+        Log.d("DEBUG", "Testing again.");
 
         initMenu();
     }
