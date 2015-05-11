@@ -35,8 +35,11 @@ dependencies {
     //Float Labelled Edit text
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
 
-
     // FreePager
     compile 'pro.alexzaitsev:freepager:1.0.1'
+
+    // Picasso Transformations
+    compile 'jp.wasabeef:picasso-transformations:1.0.3@aar'
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3@aar'
 
 }
