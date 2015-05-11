@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         // Todo
         if (position == 1) {
             // Edit Profile Activity
+            startActivity(new Intent(this, EditProfileActivity.class));
         }
         if (position == 2) {
             Intent picIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

@@ -31,4 +31,5 @@ dependencies {
 
     // Menu
     compile 'com.yalantis:contextmenu:1.0.4'
+
 }
