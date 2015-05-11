@@ -7,4 +7,9 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="profile_subtitle_logged_out">Please Log In or Sign Up\nTo Edit Your Profile!</string>
+    <string name="profile_title">Welcome,</string>
+    <string name="et_profile_name">Name</string>
+    <string name="et_profile_email">Email</string>
+    <string name="btn_profile_login_signup">Log In / Sign Up</string>
 </resources>
