@@ -4,6 +4,7 @@
     package="hu.ait.android.cevicheteam.ceviche">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         tools:replace="android:icon"

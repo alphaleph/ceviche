@@ -1,6 +1,9 @@
 package hu.ait.android.cevicheteam.ceviche;
 
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -28,17 +31,20 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private android.support.v4.app.FragmentManager fragmentManager;
     private DialogFragment mMenuDialogFragment;
 
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    private Uri fileUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         fragmentManager = getSupportFragmentManager();
         showFragment(MainFragment.TAG);
-        
-        Log.d("DEBUG", "Testing again.");
 
         initMenu();
+
     }
 
     private void showFragment(String fragmentTag) {
@@ -92,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         MenuObject camera = new MenuObject("Take Picture");
         camera.setResource(R.drawable.ic_camera_alt_black_24dp);
 
-        MenuObject send = new MenuObject("Edit Profile");
-        send.setResource(R.drawable.ic_person_black_24dp);
+        MenuObject profile = new MenuObject("Profile");
+        profile.setResource(R.drawable.ic_person_black_24dp);
 
         MenuObject searchSettings = new MenuObject("Search Settings");
         searchSettings.setResource(R.drawable.ic_edit_black_24dp);
@@ -102,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         favorites.setResource(R.drawable.ic_grade_black_24dp);
 
         menuObjects.add(close);
-        menuObjects.add(send);
+        menuObjects.add(profile);
         menuObjects.add(camera);
         menuObjects.add(searchSettings);
         menuObjects.add(favorites);
@@ -117,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             // Edit Profile Activity
         }
         if (position == 2) {
+            Intent picIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(picIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
             // Take Picture Activity
         }
         if (position == 3) {
@@ -135,4 +143,21 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             finish();
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case RESULT_CANCELED:
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                break;
+            case RESULT_OK:
+                if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+                    //storeUserData(data);
+                    Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
 }
