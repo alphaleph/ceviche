@@ -67,14 +67,13 @@ public class MainFragment extends android.support.v4.app.Fragment implements Lis
 
     @Override
     public void onBuddyItemClicked(AdapterView<?> adapterView, View view, int buddy, int position, long id) {
-        // Todo -> go to a ViewPager with current item
-        // buddy == 0 -> Item in left column
         String Url;
         if (buddy == 0) {
             Url = imageUrls_left[position];
         } else {
             Url = imageUrls_right[position];
         }
-        Toast.makeText(getActivity(), Url , Toast.LENGTH_LONG).show();
+
+        ((MainActivity) getActivity()).startSwipeActivity(Url);
     }
 }

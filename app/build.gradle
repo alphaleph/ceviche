@@ -35,4 +35,8 @@ dependencies {
     //Float Labelled Edit text
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
 
+
+    // FreePager
+    compile 'pro.alexzaitsev:freepager:1.0.1'
+
 }

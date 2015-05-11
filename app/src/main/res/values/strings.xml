@@ -12,4 +12,5 @@
     <string name="et_profile_name">Name</string>
     <string name="et_profile_email">Email</string>
     <string name="btn_profile_login_signup">Log In / Sign Up</string>
+    <string name="title_activity_swipe">SwipeActivity</string>
 </resources>

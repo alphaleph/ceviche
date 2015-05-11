@@ -1,27 +1,27 @@
 package hu.ait.android.cevicheteam.ceviche;
 
-import android.app.FragmentManager;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ActionMenuView;
+import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private DialogFragment mMenuDialogFragment;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-    private Uri fileUri;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         showFragment(MainFragment.TAG);
 
         initMenu();
-
     }
 
     private void showFragment(String fragmentTag) {
@@ -155,10 +152,15 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             case RESULT_OK:
                 if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
                     //storeUserData(data);
+                    //Bitmap photo = (Bitmap) data.getExtras().get("data");
                     Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
                 }
-                break;
         }
     }
 
+    public void startSwipeActivity(String url) {
+        Intent i = new Intent(MainActivity.this, SwipeActivity.class);
+        i.putExtra("URL", url);
+        startActivity(i);
+    }
 }
