@@ -51,4 +51,8 @@ dependencies {
     // Uncomment if using Facebook Login (optional Maven dependency)
     // compile 'com.facebook.android:facebook-android-sdk:4.0.1'
 
+    // Android Swipe Layout
+    compile "com.daimajia.swipelayout:library:1.1.8@aar"
+
+
 }
