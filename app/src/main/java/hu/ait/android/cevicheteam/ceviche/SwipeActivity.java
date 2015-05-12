@@ -22,6 +22,7 @@ public class SwipeActivity extends AppCompatActivity {
 
     private void hideActionBar() {
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.hide();
     }
 
