@@ -70,14 +70,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center_horizontal"
         android:layout_marginTop="20dp">
-    <Button
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_profile_submit"
+            android:id="@+id/btnProfileSubmit"
+            android:layout_marginRight="5dp"/>
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnLogInLogOut"
         android:text="@string/btn_profile_login_signup"/>
+
     </LinearLayout>
 
 </LinearLayout>

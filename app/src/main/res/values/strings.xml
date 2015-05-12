@@ -6,11 +6,16 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="profile_subtitle_logged_out">Please Log In or Sign Up\nTo Edit Your Profile!</string>
-    <string name="profile_title">Welcome,</string>
+    <string name="profile_title">"Welcome, "</string>
     <string name="et_profile_name">Name</string>
     <string name="et_profile_email">Email</string>
     <string name="btn_profile_login_signup">Log In / Sign Up</string>
     <string name="title_activity_swipe">SwipeActivity</string>
+    <string name="profile_subtitle_logged_in">Edit your information below!</string>
+    <string name="btn_profile_logout">Log out</string>
+    <string name="profile_guest_name">Guest</string>
+    <string name="btn_profile_submit">Submit</string>
+    <string name="submit_profile_edits">Your changes will be saved.</string>
 </resources>

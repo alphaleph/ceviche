@@ -42,4 +42,13 @@ dependencies {
     compile 'jp.wasabeef:picasso-transformations:1.0.3@aar'
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3@aar'
 
+    // Butterknife
+    compile 'com.jakewharton:butterknife:6.1.0'
+
+    // Module dependency on ParseLoginUI library sources
+    compile project(':ParseLoginUI')
+
+    // Uncomment if using Facebook Login (optional Maven dependency)
+    // compile 'com.facebook.android:facebook-android-sdk:4.0.1'
+
 }
