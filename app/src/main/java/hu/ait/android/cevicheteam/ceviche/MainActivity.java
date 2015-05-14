@@ -1,11 +1,6 @@
 package hu.ait.android.cevicheteam.ceviche;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
@@ -13,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
@@ -21,9 +15,10 @@ import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import hu.ait.android.cevicheteam.ceviche.Fragments.MainFragment;
 
 
 public class MainActivity extends AppCompatActivity implements OnMenuItemClickListener {
@@ -87,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     }
 
     private List<MenuObject> getMenuObjects() {
-        List<MenuObject> menuObjects = new ArrayList<>();
+        List<MenuObject> menuObjects = new ArrayList<MenuObject>();
 
         MenuObject close = new MenuObject();
         close.setResource(R.drawable.ic_close_black_24dp);

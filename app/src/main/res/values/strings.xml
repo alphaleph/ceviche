@@ -16,6 +16,6 @@
     <string name="profile_subtitle_logged_in">Edit your information below!</string>
     <string name="btn_profile_logout">Log out</string>
     <string name="profile_guest_name">Guest</string>
-    <string name="btn_profile_submit">Submit</string>
+    <string name="btn_profile_submit">Submit Changes</string>
     <string name="submit_profile_edits">Your changes will be saved.</string>
 </resources>
