@@ -76,4 +76,6 @@ public class MainFragment extends android.support.v4.app.Fragment implements Lis
 
         ((MainActivity) getActivity()).startSwipeActivity(Url);
     }
+
+
 }

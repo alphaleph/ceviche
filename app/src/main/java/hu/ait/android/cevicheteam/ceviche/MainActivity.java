@@ -1,22 +1,31 @@
 package hu.ait.android.cevicheteam.ceviche;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.squareup.picasso.Picasso;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
+import org.apache.http.Header;
+
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -44,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private static int MENU_SEARCH_SETTINGS = 3;
     private static int MENU_FAVORITES = 4;
 
+    private String CX_KEY = "006595710349057423305:js3hz-kiofe";
+    private String API_KEY = "AIzaSyBrlBeP70dgFnvl2zddqtRfEkmFzm6WfJY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         fragmentManager = getSupportFragmentManager();
         showFragment(MainFragment.TAG);
 
+        setSearchSettingsURLs();
         initMenu();
     }
 
@@ -217,6 +230,31 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
+    }
+
+    public void setSearchSettingsURLs() {
+        String settings = getSearchSettings();
+        String imgQuery = "https://www.googleapis.com/customsearch/v1?q=" +
+                settings + "&cx=" + CX_KEY + "&searchType=image&key=" + API_KEY;
+        new AsyncHttpClient().get(imgQuery, new AsyncHttpResponseHandler() {
+            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                String imgJson = new String(response);
+                Log.d("JSON", imgJson);
+                String firstImage = imgJson.split("link\": \"")[1].split("\"")[0];
+                //Todo update the image urls array, move this function?
+                //MainFragment.imageUrls_left.add(firstImage);
+                Log.d("First Image", firstImage);
+
+                //Picasso.with(getApplicationContext()).load(firstImage).into((ImageView) findViewById(R.id.imageView));
+            }
+            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {}
+        });
+
+    }
+
+    private String getSearchSettings() {
+        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        return sp.getString("searchSettings", "");
     }
 
 }
