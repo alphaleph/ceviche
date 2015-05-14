@@ -22,37 +22,28 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
-
     // ListBuddies
     compile 'com.jpardogo.listbuddies:library:1.1.0'
-
     // Picasso image viewer
     compile 'com.squareup.picasso:picasso:2.5.2'
-
     // Menu
     compile 'com.yalantis:contextmenu:1.0.4'
-
     //Float Labelled Edit text
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
-
     // FreePager
     compile 'pro.alexzaitsev:freepager:1.0.1'
-
     // Picasso Transformations
     compile 'jp.wasabeef:picasso-transformations:1.0.3@aar'
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.2.3@aar'
-
     // Butterknife
     compile 'com.jakewharton:butterknife:6.1.0'
-
     // Module dependency on ParseLoginUI library sources
     compile project(':ParseLoginUI')
-
     // Uncomment if using Facebook Login (optional Maven dependency)
     // compile 'com.facebook.android:facebook-android-sdk:4.0.1'
-
     // Android Swipe Layout
-    compile "com.daimajia.swipelayout:library:1.1.8@aar"
-
+    compile 'com.daimajia.swipelayout:library:1.1.8@aar'
+    // Google Custom Search API
+    compile 'com.loopj.android:android-async-http:1.4.5'
 
 }
