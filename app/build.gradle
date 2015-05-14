@@ -46,4 +46,8 @@ dependencies {
     // Google Custom Search API
     compile 'com.loopj.android:android-async-http:1.4.5'
 
+    // Rounded Buttons
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
+
+
 }

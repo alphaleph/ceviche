@@ -34,8 +34,15 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private DialogFragment mMenuDialogFragment;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    public static final String PREF_NAME = "MySettings";
 
     String mCurrentPhotoPath;
+
+    private static int MENU_QUIT = 0;
+    private static int MENU_PROFILE = 1;
+    private static int MENU_PICTURE = 2;
+    private static int MENU_SEARCH_SETTINGS = 3;
+    private static int MENU_FAVORITES = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,11 +127,11 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     @Override
     public void onMenuItemClick(View clickedView, int position) {
         // Todo
-        if (position == 1) {
+        if (position == MENU_PROFILE) {
             // Edit Profile Activity
             startActivity(new Intent(this, EditProfileActivity.class));
         }
-        if (position == 2) {
+        if (position == MENU_PICTURE) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                 File photoFile = null;
@@ -142,10 +149,12 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                 }
             }
         }
-        if (position == 3) {
+        if (position == MENU_SEARCH_SETTINGS) {
+            SearchSettingsFragment settings = new SearchSettingsFragment();
+            settings.show(getSupportFragmentManager(), SearchSettingsFragment.TAG);
             // Switch Settings Activity
         }
-        if (position == 4) {
+        if (position == MENU_FAVORITES) {
             // Favorites Activity
         }
     }
