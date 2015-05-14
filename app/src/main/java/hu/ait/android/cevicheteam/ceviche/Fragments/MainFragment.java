@@ -23,7 +23,6 @@ public class MainFragment extends android.support.v4.app.Fragment implements Lis
 
     public static final String TAG = "Home_Fragment";
 
-
     public final static String[] imageUrls_left = new String[]{
             "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSlzm9ECd0-C4V5MdsyFH5F8TAXE4S2amI1pAaFfd7csFLQ2AD-4Q",
             "http://www.applebees.com/~/media/2012_menu_images/Menu%20C/579x441/Desserts/Desserts_Brownie_Bite.jpg",
@@ -47,7 +46,6 @@ public class MainFragment extends android.support.v4.app.Fragment implements Lis
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
-
 
         mImagesLeft.addAll(Arrays.asList(imageUrls_left));
         mImagesRight.addAll(Arrays.asList(imageUrls_right));

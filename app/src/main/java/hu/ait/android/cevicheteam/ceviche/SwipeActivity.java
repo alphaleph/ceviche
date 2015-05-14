@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import hu.ait.android.cevicheteam.ceviche.Fragments.SwipeFragment;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewGroup;
 
 
 public class SwipeActivity extends AppCompatActivity {
@@ -20,6 +23,7 @@ public class SwipeActivity extends AppCompatActivity {
 
     private void hideActionBar() {
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.hide();
     }
 
