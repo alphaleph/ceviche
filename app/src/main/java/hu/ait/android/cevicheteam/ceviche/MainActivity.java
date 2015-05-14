@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         fragmentManager = getSupportFragmentManager();
         showFragment(MainFragment.TAG);
 
-        setSearchSettingsURLs();
+        //setSearchSettingsURLs();
         initMenu();
     }
 
@@ -199,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     public void startSwipeActivity(String url) {
         Intent i = new Intent(MainActivity.this, SwipeActivity.class);
         i.putExtra("URL", url);
+        Log.d("url", url);
         startActivity(i);
     }
 

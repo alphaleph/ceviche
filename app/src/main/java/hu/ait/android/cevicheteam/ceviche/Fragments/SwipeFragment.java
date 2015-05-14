@@ -114,9 +114,8 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
         this.oldFoodView = this.ivFood;
 
 
-
-        //this.ivFood = new ImageView(swipeActivity);
-        //Picasso.with(swipeActivity).load(Url).resize(800, 800).transform(transformation).centerInside().into(ivFood);
+        //todo changed this for class
+        this.ivFood = new ImageView(swipeActivity);Picasso.with(swipeActivity).load(Url).resize(800, 800).transform(transformation).centerInside().into(ivFood);
         return ivFood;
     }
 
