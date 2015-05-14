@@ -1,5 +1,7 @@
 package hu.ait.android.cevicheteam.ceviche.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,9 +45,9 @@ public class EditProfileFragment extends Fragment {
     @InjectView(R.id.tvProfileSubtitle)
     TextView tvProfileSubtitle;
     @InjectView(R.id.etProfileName)
-    TextView etProfileName;
+    EditText etProfileName;
     @InjectView(R.id.etProfileEmail)
-    TextView etProfileEmail;
+    EditText etProfileEmail;
     @InjectView(R.id.container_profile_info)
     LinearLayout containerProfileInfo;
     @InjectView(R.id.btnLogInLogOut)
@@ -70,6 +73,7 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!s.toString().equals(currentUser.getEmail())) {
@@ -78,6 +82,7 @@ public class EditProfileFragment extends Fragment {
                     btnProfileSubmit.setEnabled(false);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -89,6 +94,7 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!s.toString().equals(currentUser.getString(PARSE_NAME))) {
@@ -97,6 +103,7 @@ public class EditProfileFragment extends Fragment {
                     btnProfileSubmit.setEnabled(false);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -183,6 +190,21 @@ public class EditProfileFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        saveNameEmailEditText();
+    }
+
+    private void saveNameEmailEditText() {
+        SharedPreferences sp = getActivity().getSharedPreferences(
+                getString(R.string.PREF_PROFILE_EDIT_TEXT_CONTENT), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(getString(R.string.KEY_PROFILE_ET_NAME), etProfileName.getText().toString());
+        editor.putString(getString(R.string.KEY_PROFILE_ET_EMAIL), etProfileEmail.getText().toString());
+        editor.commit();
+    }
+
     private void showProfileLoggedIn() {
         String name = currentUser.getString(PARSE_NAME);
         if (name != null) {
@@ -194,9 +216,27 @@ public class EditProfileFragment extends Fragment {
         btnLogInLogOut.setText(getString(R.string.btn_profile_logout));
         containerProfileInfo.setVisibility(View.VISIBLE);
         btnProfileSubmit.setVisibility(View.VISIBLE);
-        etProfileEmail.setText(currentUser.getEmail());
-        etProfileName.setText(currentUser.getString(PARSE_NAME));
+        fillNameEmailEditText();
         btnProfileSubmit.setEnabled(false);
+    }
+
+    private void fillNameEmailEditText() {
+        SharedPreferences sp = getActivity().getSharedPreferences(
+                getString(R.string.PREF_PROFILE_EDIT_TEXT_CONTENT), Context.MODE_PRIVATE);
+        String prefName = sp.getString(getString(R.string.KEY_PROFILE_ET_NAME), "");
+        String prefEmail = sp.getString(getString(R.string.KEY_PROFILE_ET_EMAIL), "");
+
+        if ("".equals(prefName)) {
+            etProfileName.setText(currentUser.getString(PARSE_NAME));
+        } else {
+            etProfileName.setText(prefName);
+        }
+
+        if ("".equals(prefEmail)) {
+            etProfileEmail.setText(currentUser.getEmail());
+        } else {
+            etProfileEmail.setText(prefEmail);
+        }
     }
 
     private void showProfileLoggedOut() {

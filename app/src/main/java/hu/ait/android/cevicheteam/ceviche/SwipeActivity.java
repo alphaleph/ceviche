@@ -1,8 +1,12 @@
 package hu.ait.android.cevicheteam.ceviche;
 
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewGroup;
 
 import hu.ait.android.cevicheteam.ceviche.Fragments.SwipeFragment;
 import android.view.Menu;
