@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    tools:context="hu.ait.android.cevicheteam.ceviche.SearchSettingsFragment">
+    tools:context="hu.ait.android.cevicheteam.ceviche.Fragments.SearchSettingsFragment">
 
     <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"

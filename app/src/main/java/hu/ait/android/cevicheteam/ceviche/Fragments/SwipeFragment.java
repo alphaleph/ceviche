@@ -33,13 +33,20 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
     private Runnable swipe;
     private ViewPager verticalPager;
     private SwipeActivity swipeActivity;
+
     private ImageView ivFood;
-    private ImageView oldFoodView ;
+    private ImageView oldFoodView;
+    private ImageView oldestFoodView;
+
     private String Url;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
+
+        handler = new Handler(Looper.getMainLooper());
 
         swipeActivity = ((SwipeActivity) getActivity());
         verticalPager = (ViewPager) inflater.inflate(R.layout.fragment_swipe, container, false);
@@ -50,8 +57,6 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
         getUrl();
         setFingerGestureListener();
 
-        handler = new Handler(Looper.getMainLooper());
-
         return verticalPager;
     }
 
@@ -59,10 +64,8 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
         mySfg.setOnFingerGestureListener(new SimpleFingerGestures.OnFingerGestureListener() {
             @Override
             public boolean onSwipeUp(int fingers, long gestureDuration) {
-                if (oldFoodView != null) {
-                    oldFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_up));
-                } else if (oldFoodView == null ){
-                    ivFood.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_up));
+                if (oldestFoodView != null) {
+                    oldestFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_up));
                 }
                 setScrollRunnable();
                 Toast.makeText(swipeActivity, "Picture Saved", Toast.LENGTH_SHORT).show();
@@ -71,10 +74,8 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
 
             @Override
             public boolean onSwipeDown(int fingers, long gestureDuration) {
-                if (oldFoodView != null) {
-                    oldFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_down));
-                } else if (oldFoodView == null ){
-                    ivFood.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_down));
+                if (oldestFoodView != null) {
+                    oldestFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_down));
                 }
                 setScrollRunnable();
                 Toast.makeText(swipeActivity, "Picture Deleted", Toast.LENGTH_SHORT).show();
@@ -109,7 +110,8 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
 
     @Override
     public View makeView(int vertical, int horizontal) {
-        this.oldFoodView = ivFood;
+        this.oldestFoodView = this.oldFoodView;
+        this.oldFoodView = this.ivFood;
         this.ivFood = new ImageView(swipeActivity);
         Picasso.with(swipeActivity).load(Url).resize(800, 800).transform(transformation).centerInside().into(ivFood);
         return ivFood;
@@ -121,6 +123,7 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
             public void run() {
                 int next = verticalPager.getCurrentItem() + 1;
                 verticalPager.setCurrentItem(next);
+                oldestFoodView = oldFoodView;
             }
         };
         handler.postDelayed(swipe, 700);

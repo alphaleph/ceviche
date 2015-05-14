@@ -19,13 +19,13 @@ import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import hu.ait.android.cevicheteam.ceviche.Fragments.MainFragment;
+import hu.ait.android.cevicheteam.ceviche.Fragments.SearchSettingsFragment;
 
 
 public class MainActivity extends AppCompatActivity implements OnMenuItemClickListener {
@@ -152,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         if (position == MENU_SEARCH_SETTINGS) {
             SearchSettingsFragment settings = new SearchSettingsFragment();
             settings.show(getSupportFragmentManager(), SearchSettingsFragment.TAG);
-            // Switch Settings Activity
         }
         if (position == MENU_FAVORITES) {
             // Favorites Activity
