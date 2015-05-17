@@ -40,7 +40,6 @@ import java.util.List;
 import hu.ait.android.cevicheteam.ceviche.Fragments.MainFragment;
 import hu.ait.android.cevicheteam.ceviche.Fragments.SearchSettingsFragment;
 
-
 public class MainActivity extends AppCompatActivity implements OnMenuItemClickListener {
 
     private android.support.v4.app.FragmentManager fragmentManager;
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         if (MainFragment.TAG.equals(fragmentTag)) {
             final android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             mainFragment = new MainFragment();
-            setSearchSettingsURLs();
+            //setSearchSettingsURLs();
             fragmentTransaction.replace(R.id.layoutContainer, mainFragment, MainFragment.TAG);
 
             Handler handler = new Handler(Looper.getMainLooper());

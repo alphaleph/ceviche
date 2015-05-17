@@ -150,8 +150,8 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
         if (curr % 10 == 0 && curr != 0) {
             setAllUrls(curr);
         }
-//        this.oldestFoodView = this.oldFoodView;
-//        this.oldFoodView = this.ivFood;
+        //this.oldestFoodView = this.oldFoodView;
+        //this.oldFoodView = this.ivFood;
 
 
         //todo changed this for class
@@ -187,8 +187,8 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
 
                 Log.d("Response", imgJson);
                 for (int i = 0; i < imgJson.split("link\": \"").length; i++) {
-                    all_urls.add(imgJson.split("link\": \"")[i + 1].split("\"")[0]);
-                    Log.d("indi_url", imgJson.split("link\": \"")[i + 1].split("\"")[0]);
+                    all_urls.add(imgJson.split("link\": \"")[i+1].split("\"")[0]);
+                    Log.d("indi_url", imgJson.split("link\": \"")[i+1].split("\"")[0]);
                 }
 
             }
