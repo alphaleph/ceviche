@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     public static final String PREF_NAME = "MySettings";
 
-    private String CX_KEY = "006595710349057423305:js3hz-kiofe";
+    private String CX_KEY = "006595710349057423305:8gmhj1a1e20";
     private String API_KEY = "AIzaSyBrlBeP70dgFnvl2zddqtRfEkmFzm6WfJY";
 
     String mCurrentPhotoPath;
@@ -211,8 +211,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
 
     public void startSwipeActivity(String url) {
         Intent i = new Intent(MainActivity.this, SwipeActivity.class);
+        String meta = getMetaData(url);
         i.putExtra("URL", url);
-        Log.d("url", url);
+        i.putExtra("META", meta);
         startActivity(i);
     }
 
@@ -279,22 +280,13 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         return sp.getString("searchSettings", "");
     }
 
-
-    public String join(String[] list) {
-        String s  = "";
-        for (int i = 0; i < list.length; i++) {
-            s = s + list[i] + " ";
-        }
-        return s;
-    }
-
-    public int getMetaData(String url) {
+    public String getMetaData(String url) {
         for (int i = 0; i < imgJson.split("link\": \"").length; i++) {
             if (imgJson.split("link\": \"")[i].split("\"")[0].equals(url)) {
-                return i;
+                return imgJson.split("snippet\": \"")[i].split("\"")[0];
             }
         }
-        return -1;
+        return "FOOD";
     }
 
 }

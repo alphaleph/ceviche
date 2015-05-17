@@ -1,25 +1,16 @@
 package hu.ait.android.cevicheteam.ceviche.Fragments;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.parse.codec.binary.StringUtils;
-
-import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import hu.ait.android.cevicheteam.ceviche.Adapters.CircularAdapter;
 import hu.ait.android.cevicheteam.ceviche.MainActivity;
