@@ -1,7 +1,9 @@
 package hu.ait.android.cevicheteam.ceviche.Fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,11 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.parse.codec.binary.StringUtils;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,25 +30,26 @@ public class MainFragment extends android.support.v4.app.Fragment implements Lis
 
     public static final String TAG = "Home_Fragment";
 
-    public final static String[] imageUrls_left = new String[]{
+
+    public String[] imageUrls_left;/* = new String[]{
             "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSlzm9ECd0-C4V5MdsyFH5F8TAXE4S2amI1pAaFfd7csFLQ2AD-4Q",
             "http://www.applebees.com/~/media/2012_menu_images/Menu%20C/579x441/Desserts/Desserts_Brownie_Bite.jpg",
             "http://davidduncanhouse.com/wp/wp-content/uploads/2014/07/Chocolate-mousse-cake-with-strawberry.jpg",
             "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSLQ0O_VUN_XcJItRcnzw4uznDFI6QHeXTWfNgICsK2y-9tEv-I",
             "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQLhaxZOImFClMw-o3IJTciOJ14W_xl5GV0JK5ZcsZ6Gt1009iRJQ",
             "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSDcGiolZ6G2Wt_rLmks-35vpiNiZ2TwwuABDSR5oO1Nxao_GBbrA",
-    };
+    };*/
 
-    public final static String[] imageUrls_right = new String[]{
+    public String[] imageUrls_right;/* = new String[]{
             "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRsU6aV8k6ujehgHZUoWpREFCVVyAX-fRSi6w1bjSfQCZdNnRx3",
             "http://www.bettycrocker.com/~/media/Images/Bettys%20Dish/Headers/Recipe-Category-Pages/Meal-Type/DinnerRecipes_header.jpg",
             "https://www.captaincook.com.au/assets/images-syd-870x580/157/sg-food4_large.jpg",
             "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ0s0EHN1CMrXXN_3NblAzft5Fz13JRjVz1gb2-U5mmz-zzZuVquQ",
             "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSBl-sWQgdKcnlTAynFJbgRug0taSj6Gzq-BYLXKnsach81W1-DyA"
-    };
+    };*/
 
-    private List<String> mImagesLeft = new ArrayList<>();
-    private List<String> mImagesRight = new ArrayList<>();
+    private ArrayList<String> mImagesLeft = new ArrayList<>();
+    private ArrayList<String> mImagesRight = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
@@ -77,5 +85,12 @@ public class MainFragment extends android.support.v4.app.Fragment implements Lis
         ((MainActivity) getActivity()).startSwipeActivity(Url);
     }
 
+    public String join(ArrayList<String> list) {
+        String s  = "";
+        for (int i = 0; i < list.size(); i++) {
+            s = s + list.get(i) + " ";
+        }
+        return s;
+    }
 
 }

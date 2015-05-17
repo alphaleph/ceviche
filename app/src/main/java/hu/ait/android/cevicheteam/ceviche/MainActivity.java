@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -41,9 +44,13 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
 
     private android.support.v4.app.FragmentManager fragmentManager;
     private DialogFragment mMenuDialogFragment;
+    private MainFragment mainFragment;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     public static final String PREF_NAME = "MySettings";
+
+    private String CX_KEY = "006595710349057423305:js3hz-kiofe";
+    private String API_KEY = "AIzaSyBrlBeP70dgFnvl2zddqtRfEkmFzm6WfJY";
 
     String mCurrentPhotoPath;
 
@@ -53,8 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private static int MENU_SEARCH_SETTINGS = 3;
     private static int MENU_FAVORITES = 4;
 
-    private String CX_KEY = "006595710349057423305:js3hz-kiofe";
-    private String API_KEY = "AIzaSyBrlBeP70dgFnvl2zddqtRfEkmFzm6WfJY";
+    String imgJson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +70,24 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         fragmentManager = getSupportFragmentManager();
         showFragment(MainFragment.TAG);
 
-        //setSearchSettingsURLs();
         initMenu();
     }
 
     private void showFragment(String fragmentTag) {
         if (MainFragment.TAG.equals(fragmentTag)) {
-            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            MainFragment mainFragment = new MainFragment();
+            final android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            mainFragment = new MainFragment();
+            setSearchSettingsURLs();
             fragmentTransaction.replace(R.id.layoutContainer, mainFragment, MainFragment.TAG);
-            fragmentTransaction.commit();
+
+            Handler handler = new Handler(Looper.getMainLooper());
+            Runnable setURLS = new Runnable() {
+                @Override
+                public void run() {
+                    fragmentTransaction.commit();
+                }
+            };
+            handler.postDelayed(setURLS, 2000);
         }
     }
 
@@ -235,26 +249,52 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     public void setSearchSettingsURLs() {
         String settings = getSearchSettings();
         String imgQuery = "https://www.googleapis.com/customsearch/v1?q=" +
-                settings + "&cx=" + CX_KEY + "&searchType=image&key=" + API_KEY;
+                settings + "&cx=" + CX_KEY + "&searchType=image&num=10&key=" + API_KEY;
         new AsyncHttpClient().get(imgQuery, new AsyncHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-                String imgJson = new String(response);
-                Log.d("JSON", imgJson);
-                String firstImage = imgJson.split("link\": \"")[1].split("\"")[0];
-                //Todo update the image urls array, move this function?
-                //MainFragment.imageUrls_left.add(firstImage);
-                Log.d("First Image", firstImage);
+                imgJson = new String(response);
 
-                //Picasso.with(getApplicationContext()).load(firstImage).into((ImageView) findViewById(R.id.imageView));
+                mainFragment.imageUrls_left = new String[imgJson.split("link\": \"").length / 2];
+                mainFragment.imageUrls_right = new String[imgJson.split("link\": \"").length / 2];
+
+
+                for (int i = 0; i < imgJson.split("link\": \"").length / 2; i++) {
+                    mainFragment.imageUrls_left[i] = imgJson.split("link\": \"")[i+1].split("\"")[0];
+                }
+                int place = 0;
+                for (int i=mainFragment.imageUrls_left.length; i<imgJson.split("link\": \"").length-1; i++) {
+                    mainFragment.imageUrls_right[place] = imgJson.split("link\": \"")[i+1].split("\"")[0];
+                    place = place + 1;
+                }
             }
-            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {}
+
+            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+            }
         });
 
     }
 
     private String getSearchSettings() {
-        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(MainActivity.PREF_NAME, MainActivity.MODE_PRIVATE);
         return sp.getString("searchSettings", "");
+    }
+
+
+    public String join(String[] list) {
+        String s  = "";
+        for (int i = 0; i < list.length; i++) {
+            s = s + list[i] + " ";
+        }
+        return s;
+    }
+
+    public int getMetaData(String url) {
+        for (int i = 0; i < imgJson.split("link\": \"").length; i++) {
+            if (imgJson.split("link\": \"")[i].split("\"")[0].equals(url)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
 }
