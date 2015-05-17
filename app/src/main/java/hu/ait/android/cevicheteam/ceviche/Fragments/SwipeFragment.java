@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.parse.ParseUser;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.squareup.picasso.Picasso;
@@ -29,7 +30,7 @@ import pro.alexzaitsev.freepager.library.view.infinite.Constants;
 import pro.alexzaitsev.freepager.library.view.infinite.InfiniteHorizontalPagerAdapter;
 import pro.alexzaitsev.freepager.library.view.infinite.ViewFactory;
 
-public class SwipeFragment extends android.support.v4.app.Fragment implements ViewFactory{
+public class SwipeFragment extends android.support.v4.app.Fragment implements ViewFactory {
 
     public static final String TAG = "Swipe_Fragment";
 
@@ -84,7 +85,7 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
                 //    oldestFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_up));
                 //}
                 setScrollRunnable();
-                Toast.makeText(swipeActivity, "Picture Saved", Toast.LENGTH_SHORT).show();
+                savePhotoAsFavorite();
                 return false;
             }
 
@@ -120,6 +121,17 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
         });
     }
 
+    private void savePhotoAsFavorite() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            currentUser.addUnique(swipeActivity.getString(R.string.parse_favorite_photos), Url);
+            currentUser.saveEventually();
+            Toast.makeText(swipeActivity, swipeActivity.getString(R.string.favorites_photo_saved), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(swipeActivity, swipeActivity.getString(R.string.favorites_photo_not_saved), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void getUrl() {
         Url = swipeActivity.getIntent().getStringExtra("URL");
     }
@@ -138,6 +150,13 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
         if (curr % 10 == 0 && curr != 0) {
             setAllUrls(curr);
         }
+        this.oldestFoodView = this.oldFoodView;
+        this.oldFoodView = this.ivFood;
+
+
+        //todo changed this for class
+        this.ivFood = new ImageView(swipeActivity);
+        Picasso.with(swipeActivity).load(Url).resize(800, 800).transform(transformation).centerInside().into(ivFood);
         return ivFood;
     }
 

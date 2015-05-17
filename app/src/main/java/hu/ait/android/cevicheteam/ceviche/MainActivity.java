@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuObject;
@@ -178,7 +179,15 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             settings.show(getSupportFragmentManager(), SearchSettingsFragment.TAG);
         }
         if (position == MENU_FAVORITES) {
+            startFavoritesActivity();
+        }
+    }
+
+    private void startFavoritesActivity() {
+        if (ParseUser.getCurrentUser() != null) {
             startActivity(new Intent(this, FavoritesActivity.class));
+        } else {
+            Toast.makeText(this, getString(R.string.favorites_open_fail), Toast.LENGTH_SHORT).show();
         }
     }
 

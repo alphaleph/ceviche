@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -172,8 +173,6 @@ public class EditProfileFragment extends Fragment {
     private void startParseLogInActivity() {
         ParseLoginBuilder builder = new ParseLoginBuilder(getActivity());
         Intent parseLoginIntent = builder.build();
-        //TODO: Make Shrimpy smaller for LoginScreen
-        //Intent parseLoginIntent = builder.setAppLogo(R.drawable.shrimpy).build();
         //TODO: Don't start unless you have internet connection.
         startActivityForResult(parseLoginIntent, PARSE_LOGIN_CODE);
     }
@@ -196,6 +195,31 @@ public class EditProfileFragment extends Fragment {
         saveNameEmailEditText();
     }
 
+    private void showProfileLoggedIn() {
+        String name = currentUser.getString(PARSE_NAME);
+        if (name != null) {
+            tvProfileTitle.setText(getString(R.string.profile_title) + name);
+        } else {
+            tvProfileTitle.setText(getString(R.string.profile_title) + getString(R.string.profile_guest_name));
+        }
+        resetNameEmailEditText();
+        tvProfileSubtitle.setText(getString(R.string.profile_subtitle_logged_in));
+        btnLogInLogOut.setText(getString(R.string.btn_profile_logout));
+        containerProfileInfo.setVisibility(View.VISIBLE);
+        btnProfileSubmit.setVisibility(View.VISIBLE);
+        fillNameEmailEditText();
+        btnProfileSubmit.setEnabled(false);
+    }
+
+    private void resetNameEmailEditText() {
+        SharedPreferences sp = getActivity().getSharedPreferences(
+                getString(R.string.PREF_PROFILE_EDIT_TEXT_CONTENT), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(getString(R.string.KEY_PROFILE_ET_NAME), "");
+        editor.putString(getString(R.string.KEY_PROFILE_ET_EMAIL), "");
+        editor.commit();
+    }
+
     private void saveNameEmailEditText() {
         SharedPreferences sp = getActivity().getSharedPreferences(
                 getString(R.string.PREF_PROFILE_EDIT_TEXT_CONTENT), Context.MODE_PRIVATE);
@@ -205,26 +229,13 @@ public class EditProfileFragment extends Fragment {
         editor.commit();
     }
 
-    private void showProfileLoggedIn() {
-        String name = currentUser.getString(PARSE_NAME);
-        if (name != null) {
-            tvProfileTitle.setText(getString(R.string.profile_title) + name);
-        } else {
-            tvProfileTitle.setText(getString(R.string.profile_title) + currentUser.getUsername());
-        }
-        tvProfileSubtitle.setText(getString(R.string.profile_subtitle_logged_in));
-        btnLogInLogOut.setText(getString(R.string.btn_profile_logout));
-        containerProfileInfo.setVisibility(View.VISIBLE);
-        btnProfileSubmit.setVisibility(View.VISIBLE);
-        fillNameEmailEditText();
-        btnProfileSubmit.setEnabled(false);
-    }
-
     private void fillNameEmailEditText() {
         SharedPreferences sp = getActivity().getSharedPreferences(
                 getString(R.string.PREF_PROFILE_EDIT_TEXT_CONTENT), Context.MODE_PRIVATE);
         String prefName = sp.getString(getString(R.string.KEY_PROFILE_ET_NAME), "");
         String prefEmail = sp.getString(getString(R.string.KEY_PROFILE_ET_EMAIL), "");
+
+        Log.d("ROCK", "PrefName: " + prefName + " PrefEmail: " + prefEmail);
 
         if ("".equals(prefName)) {
             etProfileName.setText(currentUser.getString(PARSE_NAME));

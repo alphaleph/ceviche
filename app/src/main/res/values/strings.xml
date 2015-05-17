@@ -17,7 +17,7 @@
     <string name="btn_profile_logout">Log out</string>
     <string name="profile_guest_name">Guest</string>
     <string name="btn_profile_submit">Submit Changes</string>
-    <string name="submit_profile_edits">Your changes will be saved.</string>
+    <string name="submit_profile_edits">Your changes have been saved.</string>
     <string name="search_preferences_button">Search Preferences</string>
     <string name="save_button_default">Save</string>
     <string name="save_button_success">Saved</string>
@@ -28,4 +28,9 @@
     <string name="KEY_PROFILE_ET_NAME">Key_Profile_etName</string>
     <string name="KEY_PROFILE_ET_EMAIL">Key_Profile_etEmail</string>
     <string name="title_activity_favorites">FavoritesActivity</string>
+    <string name="parse_favorite_photos">favorite_photos</string>
+    <string name="favorites_photo_saved">Picture saved in Favorites.</string>
+    <string name="favorites_photo_not_saved">You must be logged in to save photos.</string>
+    <string name="favorites_open_fail">You must be logged in to view Favorites.</string>
+    <string name="favorites_populate_fail">You have no Favorites yet!</string>
 </resources>
