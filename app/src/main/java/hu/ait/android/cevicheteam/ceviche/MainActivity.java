@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     public static final String PREF_NAME = "MySettings";
 
-    private String CX_KEY = "006595710349057423305:8gmhj1a1e20";
+    private String CX_KEY = "006617864152107317551:-n2_ranhccq"; //"006595710349057423305:8gmhj1a1e20";
     private String API_KEY = "AIzaSyBrlBeP70dgFnvl2zddqtRfEkmFzm6WfJY";
 
     String mCurrentPhotoPath;
