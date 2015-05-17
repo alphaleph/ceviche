@@ -28,7 +28,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     // Menu
     compile 'com.yalantis:contextmenu:1.0.4'
-    //Float Labelled Edit text
+    // Float Labelled Edit text
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     // FreePager
     compile 'pro.alexzaitsev:freepager:1.0.1'

@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     }
 
     private List<MenuObject> getMenuObjects() {
-        List<MenuObject> menuObjects = new ArrayList<MenuObject>();
+        List<MenuObject> menuObjects = new ArrayList<>();
 
         MenuObject close = new MenuObject();
         close.setResource(R.drawable.ic_close_black_24dp);
@@ -139,9 +139,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
 
     @Override
     public void onMenuItemClick(View clickedView, int position) {
-        // Todo
         if (position == MENU_PROFILE) {
-            // Edit Profile Activity
             startActivity(new Intent(this, EditProfileActivity.class));
         }
         if (position == MENU_PICTURE) {
@@ -151,14 +149,13 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                 try {
                     photoFile = createImageFile();
                 } catch (IOException ex) {
-                    // Error occurred while creating the File
+                    ex.printStackTrace();
                 }
                 if (photoFile != null) {
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                             Uri.fromFile(photoFile));
                     startActivityForResult(takePictureIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
                     galleryAddPic();
-
                 }
             }
         }
@@ -167,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             settings.show(getSupportFragmentManager(), SearchSettingsFragment.TAG);
         }
         if (position == MENU_FAVORITES) {
-            // Favorites Activity
+            startActivity(new Intent(this, FavoritesActivity.class));
         }
     }
 
@@ -189,10 +186,12 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                 break;
             case RESULT_OK:
                 if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+                    // TODO: Add Pic reference to SugarORM?
                     //storeUserData(data);
                     //Bitmap photo = (Bitmap) data.getExtras().get("data");
                     Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
                 }
+                break;
         }
     }
 
@@ -205,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //No call for super(). Bug on API Level > 11.
+        // No call for super(). Bug on API Level > 11.
         // Necessary to keep app from crashing when launching camera
     }
 

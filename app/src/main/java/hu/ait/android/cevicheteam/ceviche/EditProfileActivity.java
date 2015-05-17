@@ -52,5 +52,4 @@ public class EditProfileActivity extends AppCompatActivity {
             transaction.commit();
         }
     }
-
 }

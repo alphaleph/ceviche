@@ -27,4 +27,5 @@
     <string name="PREF_PROFILE_EDIT_TEXT_CONTENT">Profile_Edit_Text_Content</string>
     <string name="KEY_PROFILE_ET_NAME">Key_Profile_etName</string>
     <string name="KEY_PROFILE_ET_EMAIL">Key_Profile_etEmail</string>
+    <string name="title_activity_favorites">FavoritesActivity</string>
 </resources>

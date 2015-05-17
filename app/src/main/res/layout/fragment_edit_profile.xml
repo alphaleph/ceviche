@@ -1,86 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvProfileTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="45dp"
-            android:gravity="center_horizontal"
-            android:text="@string/profile_title"
-            android:textColor="#000000"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/tvProfileSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="25dp"
-            android:gravity="center_horizontal"
-            android:text="@string/profile_subtitle_logged_out"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/container_profile_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:orientation="vertical">
-
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <EditText
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvProfileTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/et_profile_name"
-                android:id="@+id/etProfileName"/>
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="45dp"
+                android:gravity="center_horizontal"
+                android:text="@string/profile_title"
+                android:textColor="#000000"
+                android:textSize="25sp" />
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            <TextView
+                android:id="@+id/tvProfileSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:gravity="center_horizontal"
+                android:text="@string/profile_subtitle_logged_out"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_profile_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
 
-            <EditText
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etProfileName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/et_profile_name" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etProfileEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/et_profile_email" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnProfileSubmit"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/et_profile_email"
-                android:id="@+id/etProfileEmail"/>
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+                android:layout_marginRight="5dp"
+                android:enabled="false"
+                android:text="@string/btn_profile_submit" />
 
+            <Button
+                android:id="@+id/btnLogInLogOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_profile_login_signup" />
+
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="20dp">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_profile_submit"
-            android:id="@+id/btnProfileSubmit"
-            android:layout_marginRight="5dp"
-            android:enabled="false"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLogInLogOut"
-            android:text="@string/btn_profile_login_signup"/>
-
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>
