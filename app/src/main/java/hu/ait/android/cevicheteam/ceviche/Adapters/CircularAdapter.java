@@ -30,6 +30,14 @@ public class CircularAdapter extends CircularLoopAdapter {
         mItems = imagesUrl;
     }
 
+    protected Context getContext() {
+        return mContext;
+    }
+
+    protected int getRowHeight() {
+        return mRowHeight;
+    }
+
     @Override
     protected int getCircularCount() {
         return mItems.size();

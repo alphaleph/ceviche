@@ -4,19 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
+import com.jpardogo.listbuddies.lib.adapters.CircularLoopAdapter;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
+import com.parse.ParseUser;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import hu.ait.android.cevicheteam.ceviche.Adapters.CircularAdapter;
-import hu.ait.android.cevicheteam.ceviche.MainActivity;
+import hu.ait.android.cevicheteam.ceviche.Adapters.DefaultImageCircularAdapter;
 import hu.ait.android.cevicheteam.ceviche.R;
 
 /**
@@ -25,7 +31,6 @@ import hu.ait.android.cevicheteam.ceviche.R;
 public class FavoritesFragment extends Fragment implements ListBuddiesLayout.OnBuddyItemClickListener {
 
     public static final String TAG = "Favorites_Fragment";
-
 
     // TODO: Get Personal Ceviche Pictures (SugarORM?)
     private List<String> personalPicUris = new ArrayList<>(Arrays.asList(
@@ -52,14 +57,28 @@ public class FavoritesFragment extends Fragment implements ListBuddiesLayout.OnB
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_favorites, null);
 
-        ListBuddiesLayout listBuddies = (ListBuddiesLayout) rootView.findViewById(R.id.listbuddies);
         CircularAdapter adapter = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_small), personalPicUris);
-        CircularAdapter adapter2 = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_tall), favoritePicUris);
+
+        ListBuddiesLayout listBuddies = (ListBuddiesLayout) rootView.findViewById(R.id.listbuddies);
+        CircularAdapter adapter2 = setFavoritesAdapter();
 
         listBuddies.setAdapters(adapter, adapter2);
         listBuddies.setOnItemClickListener(this);
         return rootView;
     }
+
+    private CircularAdapter setFavoritesAdapter() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        List<String> favPhotos = currentUser.getList(getString(R.string.parse_favorite_photos));
+
+        if ( favPhotos != null && (!favPhotos.isEmpty()) ) {
+            return new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_tall), favoritePicUris);
+        } else {
+            Toast.makeText(this.getActivity(), this.getActivity().getString(R.string.favorites_populate_fail), Toast.LENGTH_LONG).show();
+            return new DefaultImageCircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_tall));
+        }
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -75,6 +94,6 @@ public class FavoritesFragment extends Fragment implements ListBuddiesLayout.OnB
             Url = favoritePicUris.get(position);
         }
 
-        ((MainActivity) getActivity()).startSwipeActivity(Url);
+        //TODO: Delete Dialog Fragment
     }
 }
