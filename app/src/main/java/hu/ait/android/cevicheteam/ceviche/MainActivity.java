@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import hu.ait.android.cevicheteam.ceviche.Fragments.MainFragment;
 import hu.ait.android.cevicheteam.ceviche.Fragments.SearchSettingsFragment;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     public static final String PREF_NAME = "MySettings";
 
-    private String CX_KEY = "006617864152107317551:-n2_ranhccq"; //"006595710349057423305:8gmhj1a1e20";
+    private String CX_KEY = "006595710349057423305:js3hz-kiofe";
     private String API_KEY = "AIzaSyBrlBeP70dgFnvl2zddqtRfEkmFzm6WfJY";
 
     String mCurrentPhotoPath;
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private static int MENU_FAVORITES = 4;
 
     String imgJson;
+
+    public Random rand = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         if (MainFragment.TAG.equals(fragmentTag)) {
             final android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             mainFragment = new MainFragment();
-            //setSearchSettingsURLs();
+            setSearchSettingsURLs();
             fragmentTransaction.replace(R.id.layoutContainer, mainFragment, MainFragment.TAG);
 
             Handler handler = new Handler(Looper.getMainLooper());
@@ -222,8 +225,21 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     public void startSwipeActivity(String url) {
         Intent i = new Intent(MainActivity.this, SwipeActivity.class);
         String meta = getMetaData(url);
+
+        int min = 0;
+        int max = MainFragment.extras.length;
+        int rand1 = randInt(min, max);
+        int rand2 = randInt(min, max);
+
+        String url1 = MainFragment.extras[rand1];
+        String url2 = MainFragment.extras[rand2];
+
         i.putExtra("URL", url);
+        i.putExtra("URL1", url1);
+        i.putExtra("URL2", url2);
+
         i.putExtra("META", meta);
+        Log.d("META", meta);
         startActivity(i);
     }
 
@@ -270,16 +286,17 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
 
 
                 for (int i = 0; i < imgJson.split("link\": \"").length / 2; i++) {
-                    mainFragment.imageUrls_left[i] = imgJson.split("link\": \"")[i+1].split("\"")[0];
+                    mainFragment.imageUrls_left[i] = imgJson.split("link\": \"")[i + 1].split("\"")[0];
                 }
                 int place = 0;
-                for (int i=mainFragment.imageUrls_left.length; i<imgJson.split("link\": \"").length-1; i++) {
-                    mainFragment.imageUrls_right[place] = imgJson.split("link\": \"")[i+1].split("\"")[0];
+                for (int i = mainFragment.imageUrls_left.length; i < imgJson.split("link\": \"").length - 1; i++) {
+                    mainFragment.imageUrls_right[place] = imgJson.split("link\": \"")[i + 1].split("\"")[0];
                     place = place + 1;
                 }
             }
 
             public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+                Log.d("Result", "Failure");
             }
         });
 
@@ -293,10 +310,17 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     public String getMetaData(String url) {
         for (int i = 0; i < imgJson.split("link\": \"").length; i++) {
             if (imgJson.split("link\": \"")[i].split("\"")[0].equals(url)) {
+                Log.d("Meta",imgJson.split("snippet\": \"")[i].split("\"")[0]);
                 return imgJson.split("snippet\": \"")[i].split("\"")[0];
             }
         }
         return "FOOD";
+    }
+
+    public int randInt(int min, int max) {
+
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
     }
 
 }
