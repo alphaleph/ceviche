@@ -34,7 +34,7 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
 
     public static final String TAG = "Swipe_Fragment";
 
-    private String CX_KEY = "006617864152107317551:-n2_ranhccq"; //"006595710349057423305:8gmhj1a1e20";
+    private String CX_KEY = "006595710349057423305:js3hz-kiofe";
     private String API_KEY = "AIzaSyBrlBeP70dgFnvl2zddqtRfEkmFzm6WfJY";
 
     private SimpleFingerGestures mySfg = new SimpleFingerGestures();
@@ -46,13 +46,14 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
     private SwipeActivity swipeActivity;
 
     private ImageView ivFood;
+    private ImageView oldFoodView;
+    private ImageView oldestFoodView;
 
     private String Url;
     private String Meta;
     private ArrayList<String> all_urls = new ArrayList<>();
 
     private int curr = 0;
-    private int pager_flag = 3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
@@ -67,12 +68,9 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
         verticalPager.setOnTouchListener(mySfg);
 
         getUrl();
-        all_urls.add(Url);
-        setAllUrls(0);
         getMetaData();
+        setAllUrls(1);
         setFingerGestureListener();
-
-        Log.d("URLS", join(all_urls));
         return verticalPager;
     }
 
@@ -81,9 +79,9 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
 
             @Override
             public boolean onSwipeUp(int fingers, long gestureDuration) {
-                //if (oldestFoodView != null) {
-                //    oldestFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_up));
-                //}
+                if (oldestFoodView != null) {
+                    oldestFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_up));
+                }
                 setScrollRunnable();
                 savePhotoAsFavorite();
                 return false;
@@ -91,9 +89,9 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
 
             @Override
             public boolean onSwipeDown(int fingers, long gestureDuration) {
-                //if (oldestFoodView != null) {
-                //    oldestFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_down));
-                //}
+                if (oldestFoodView != null) {
+                    oldestFoodView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.move_down));
+                }
                 setScrollRunnable();
                 Toast.makeText(swipeActivity, "Picture Deleted", Toast.LENGTH_SHORT).show();
                 return false;
@@ -134,6 +132,11 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
 
     private void getUrl() {
         Url = swipeActivity.getIntent().getStringExtra("URL");
+        all_urls.add(Url);
+        String Url1 = swipeActivity.getIntent().getStringExtra("URL1");
+        all_urls.add(Url1);
+        String Url2 = swipeActivity.getIntent().getStringExtra("URL2");
+        all_urls.add(Url2);
     }
 
     private void getMetaData() {Meta = swipeActivity.getIntent().getStringExtra("META");}
@@ -142,21 +145,14 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
     public View makeView(int vertical, int horizontal) {
         this.ivFood = new ImageView(swipeActivity);
         Picasso.with(swipeActivity).load(all_urls.get(curr)).resize(800, 800).transform(transformation).centerInside().into(ivFood);
-        if (pager_flag > 0) {
-            pager_flag = pager_flag - 1;
-        } else if (pager_flag == 0) {
-            curr = curr + 1;
-        }
+        curr = curr + 1;
+
         if (curr % 10 == 0 && curr != 0) {
             setAllUrls(curr);
         }
-        //this.oldestFoodView = this.oldFoodView;
-        //this.oldFoodView = this.ivFood;
 
-
-        //todo changed this for class
-        this.ivFood = new ImageView(swipeActivity);
-        Picasso.with(swipeActivity).load(Url).resize(800, 800).transform(transformation).centerInside().into(ivFood);
+        this.oldestFoodView = this.oldFoodView;
+        this.oldFoodView = this.ivFood;
         return ivFood;
     }
 
@@ -164,13 +160,7 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
         swipe = new Runnable() {
             @Override
             public void run() {
-                int next;
-                if (pager_flag == 0) {
-                    next = verticalPager.getCurrentItem() + 1;
-                }
-                else {
-                    next = verticalPager.getCurrentItem();
-                }
+                int next = verticalPager.getCurrentItem() + 1;
                 verticalPager.setCurrentItem(next);
             }
         };
@@ -185,25 +175,17 @@ public class SwipeFragment extends android.support.v4.app.Fragment implements Vi
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                 String imgJson = new String(response);
 
-                Log.d("Response", imgJson);
-                for (int i = 0; i < imgJson.split("link\": \"").length; i++) {
-                    all_urls.add(imgJson.split("link\": \"")[i+1].split("\"")[0]);
-                    Log.d("indi_url", imgJson.split("link\": \"")[i+1].split("\"")[0]);
+                Log.d("Order", "Search Successful");
+                for (int i = 1; i < imgJson.split("link\": \"").length; i++) {
+                    all_urls.add(imgJson.split("link\": \"")[i].split("\"")[0]);
                 }
 
             }
 
             public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+                Log.d("Response", "Failure");
             }
         });
 
-    }
-
-    public String join(ArrayList<String> list) {
-        String s  = "";
-        for (int i = 0; i < list.size(); i++) {
-            s = s + list.get(i) + " ";
-        }
-        return s;
     }
 }
