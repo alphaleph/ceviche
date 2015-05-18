@@ -16,6 +16,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import hu.ait.android.cevicheteam.ceviche.Adapters.CircularAdapter;
 import hu.ait.android.cevicheteam.ceviche.Adapters.DefaultImageCircularAdapter;
@@ -29,10 +30,7 @@ public class FavoritesFragment extends Fragment implements ListBuddiesLayout.OnB
     public static final String TAG = "Favorites_Fragment";
 
     // TODO: Get Personal Ceviche Pictures (SugarORM?)
-    private List<String> personalPicUris = new ArrayList<>(Arrays.asList(
-            "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQpIpz3DAfFl5vIem3qP7Eutkc8_XfyiZs_ymF61nnw6_nQoqPA"
-    ));
-
+    private List<String> personalPicUris;
     private List<String> favoritePicUris;
 
     @Nullable
@@ -40,14 +38,17 @@ public class FavoritesFragment extends Fragment implements ListBuddiesLayout.OnB
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_favorites, null);
 
-        CircularAdapter adapter = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_small), personalPicUris);
-
         ListBuddiesLayout listBuddies = (ListBuddiesLayout) rootView.findViewById(R.id.listbuddies);
+        CircularAdapter adapter = setPersonalPicAdapter();
         CircularAdapter adapter2 = setFavoritesAdapter();
 
         listBuddies.setAdapters(adapter, adapter2);
         listBuddies.setOnItemClickListener(this);
         return rootView;
+    }
+
+    private CircularAdapter setPersonalPicAdapter() {
+        return new DefaultImageCircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_small));
     }
 
     private CircularAdapter setFavoritesAdapter() {
@@ -61,7 +62,6 @@ public class FavoritesFragment extends Fragment implements ListBuddiesLayout.OnB
             return new DefaultImageCircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_tall));
         }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

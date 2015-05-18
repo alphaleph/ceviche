@@ -2,6 +2,7 @@ package hu.ait.android.cevicheteam.ceviche;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -209,8 +210,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             case RESULT_OK:
                 if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
                     // TODO: Add Pic reference to SugarORM?
-                    //storeUserData(data);
-                    //Bitmap photo = (Bitmap) data.getExtras().get("data");
+//                    String imgUri = data.getData();
+//                    storeUserData(data);
+//                    Bitmap photo = (Bitmap) data.getExtras().get("data");
                     Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
                 }
                 break;

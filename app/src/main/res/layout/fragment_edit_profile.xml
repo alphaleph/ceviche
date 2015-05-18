@@ -76,16 +76,14 @@
 
             <Button
                 android:id="@+id/btnProfileSubmit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/EditProfile.Button"
                 android:layout_marginRight="5dp"
                 android:enabled="false"
                 android:text="@string/btn_profile_submit" />
 
             <Button
                 android:id="@+id/btnLogInLogOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/EditProfile.Button"
                 android:text="@string/btn_profile_login_signup" />
 
         </LinearLayout>
