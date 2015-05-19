@@ -32,4 +32,6 @@
     <string name="favorites_photo_not_saved">You must be logged in to save photos.</string>
     <string name="favorites_open_fail">You must be logged in to view Favorites.</string>
     <string name="favorites_populate_fail">You have no Favorites yet!</string>
+    <string name="default_search_query">FOOD</string>
+    <string name="PREF_MAIN_SEARCH_SETTINGS">searchSettings</string>
 </resources>

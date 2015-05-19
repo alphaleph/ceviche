@@ -1,6 +1,7 @@
 package hu.ait.android.cevicheteam.ceviche.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,7 @@ public class CircularAdapter extends CircularLoopAdapter {
         holder.image.setMinimumHeight(mRowHeight);
 
         Picasso.with(mContext).load(getItem(position)).transform(new ScaleToFitWidthHeightTransform(mRowHeight, true)).into(holder.image);
+
         return convertView;
     }
 }

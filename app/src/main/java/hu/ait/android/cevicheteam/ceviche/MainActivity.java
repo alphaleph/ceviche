@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
 
     private String getSearchSettings() {
         SharedPreferences sp = getSharedPreferences(MainActivity.PREF_NAME, MainActivity.MODE_PRIVATE);
-        return sp.getString("searchSettings", "");
+        return sp.getString(getString(R.string.PREF_MAIN_SEARCH_SETTINGS), getString(R.string.default_search_query));
     }
 
     public String getMetaData(String url) {
@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                 return imgJson.split("snippet\": \"")[i].split("\"")[0];
             }
         }
-        return "FOOD";
+        return getString(R.string.default_search_query);
     }
 
     public int randInt(int min, int max) {
